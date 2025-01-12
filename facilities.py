@@ -109,8 +109,8 @@ def insert_data_into_mysql(facility_data, conn):
 
 def main():
     batch_size = 100  # Number of records per batch
-    start_index = 1301  # Starting index
-    end_index = 30000  # End index
+    start_index = 1  # Starting index
+    end_index = 50000  # End index
 
     conn = connect_to_mysql()
     if not conn:
@@ -123,7 +123,7 @@ def main():
         facility_data = fetch_facility_data(from_index, to_index)
         if facility_data:
             # logging.debug(f"Fetched data: {facility_data}")
-            save_json_to_file(facility_data, f'facility_data_{from_index}_{to_index}.json')
+            save_json_to_file(facility_data, f'facilities/facility_data_{from_index}_{to_index}.json')
             insert_data_into_mysql(facility_data, conn)
 
     conn.close()

@@ -121,7 +121,7 @@ def main():
         facility_data = fetch_facility_data(from_index, to_index)
         if facility_data:
             # logging.debug(f"Fetched data: {facility_data}")
-            save_json_to_file(facility_data, f'facility_group_data_{from_index}_{to_index}.json')
+            save_json_to_file(facility_data, f'facility_group/facility_group_data_{from_index}_{to_index}.json')
             insert_data_into_mysql(facility_data, conn)
 
     conn.close()
