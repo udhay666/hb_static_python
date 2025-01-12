@@ -34,7 +34,7 @@ def save_json_to_file(data, filename):
 
 # Function to fetch data from API
 def fetch_facility_data(from_index, to_index):
-    url = 'https://api.test.hotelbeds.com/hotel-content-api/1.0/types/facilities'
+    url = 'https://api.hotelbeds.com/hotel-content-api/1.0/types/facilities'
     params = {
         'fields': 'all',
         'language': 'ENG',
