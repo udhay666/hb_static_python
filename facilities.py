@@ -110,7 +110,7 @@ def insert_data_into_mysql(facility_data, conn):
 def main():
     batch_size = 100  # Number of records per batch
     start_index = 1  # Starting index
-    end_index = 50000  # End index
+    end_index = 100  # End index
 
     conn = connect_to_mysql()
     if not conn:

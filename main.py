@@ -81,7 +81,7 @@ def insert_data_into_mysql(hotel_data, conn):
         for hotel in hotel_data['hotels']:
             table_name = 'hb_hotel_general_info'
             hotel_general_info_query = """
-                INSERT INTO hb_hotel_general_info (hotel_code, hotel_name, category_code, accommodation_type_code, email, website, last_update, S2C, ranking)
+                INSERT INTO hb_hotel_info (hotel_code, hotel_name, category_code, accommodation_type_code, email, website, last_update, S2C, ranking)
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
             """
             hotel_general_info_data = (
