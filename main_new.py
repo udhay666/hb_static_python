@@ -81,8 +81,8 @@ def insert_data_into_mysql(hotel_data, conn):
             # Prepare the general data to store in JSON format
             hotel_details = {
                 'name': hotel['name']['content'],
-                'category_code': hotel['categoryCode'],
-                'accommodation_type_code': hotel['accommodationTypeCode'],
+                'category_code': hotel.get('categoryCode', None),
+                'accommodation_type_code': hotel.get('accommodationTypeCode', None),
                 'email': hotel.get('email', None),
                 'website': hotel.get('web', None),
                 'last_update': hotel['lastUpdate'],
