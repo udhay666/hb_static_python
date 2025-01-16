@@ -98,12 +98,14 @@ def insert_data_into_mysql(hotel_data, conn):
                 'address': hotel.get('address', {}).get('content', None)
             }
 
-            # Insert into `hb_hotel_info` table
+            # Ensure we are passing the correct number of parameters
             insert_query = """
                 INSERT INTO hb_hotel_info 
                 (hotel_code, hotel_name, category_code, accommodation_type_code, email, website, last_update, S2C, ranking, coordinates, city, facilities, rooms, images, phones, board_codes, address, hotel_details)
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             """
+            
+            # Prepare the data
             insert_data = (
                 hotel_code,
                 hotel['name']['content'],
@@ -114,18 +116,21 @@ def insert_data_into_mysql(hotel_data, conn):
                 hotel['lastUpdate'],
                 hotel.get('S2C', None),
                 hotel['ranking'],
-                json.dumps(hotel.get('coordinates', {})),
+                json.dumps(hotel.get('coordinates', {})),  # Serialize JSON data for coordinates
                 hotel.get('city', {}).get('content', None),
-                json.dumps(hotel.get('facilities', [])),
-                json.dumps(hotel.get('rooms', [])),
-                json.dumps(hotel.get('images', [])),
-                json.dumps(hotel.get('phones', [])),
-                json.dumps(hotel.get('boardCodes', [])),
-                hotel.get('address', {}).get('content', None),
-                json.dumps(hotel_details)  # Optional general hotel details
+                json.dumps(hotel.get('facilities', [])),    # Serialize JSON for facilities
+                json.dumps(hotel.get('rooms', [])),         # Serialize JSON for rooms
+                json.dumps(hotel.get('images', [])),        # Serialize JSON for images
+                json.dumps(hotel.get('phones', [])),        # Serialize JSON for phones
+                json.dumps(hotel.get('boardCodes', [])),    # Serialize JSON for board codes
+                hotel.get('address', {}).get('content', None),  # Address field
+                json.dumps(hotel_details)                   # Serialize JSON for hotel details
             )
+
+            # Execute the insertion
             cursor.execute(insert_query, insert_data)
 
+        # Commit the transaction
         conn.commit()
         logging.info("Data inserted into MySQL tables successfully.")
 
@@ -139,7 +144,7 @@ def insert_data_into_mysql(hotel_data, conn):
 def main():
     batch_size = 200  # Number of records per batch
     start_index = 1  # Starting index
-    end_index = 50000  # End index
+    end_index = 400  # End index
 
     conn = connect_to_mysql()
     if not conn:
