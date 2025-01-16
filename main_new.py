@@ -102,7 +102,7 @@ def insert_data_into_mysql(hotel_data, conn):
             insert_query = """
                 INSERT INTO hb_hotel_info 
                 (hotel_code, hotel_name, category_code, accommodation_type_code, email, website, last_update, S2C, ranking, coordinates, city, facilities, rooms, images, phones, board_codes, address, hotel_details)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             """
             
             # Prepare the data
